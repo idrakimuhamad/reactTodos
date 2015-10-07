@@ -1,4 +1,3 @@
-Meteor.subscribe('tasks');
 
 App = React.createClass({
     mixins: [ReactMeteorData],
@@ -10,15 +9,19 @@ App = React.createClass({
     },
 
     getMeteorData() {
-        let query = {};
+        let query = {},
+            handle = Meteor.subscribe('tasks'),
+            data = {};
 
         if (this.state.hideCompleted) {
             query = { checked: { $ne: true }};
         }
 
-        return {
-            tasks: Tasks.find(query, { sort: { createdAt: -1 } }).fetch()
+        if (handle.ready()) {
+            data.tasks = Tasks.find(query, { sort: { createdAt: -1 } }).fetch()
         }
+
+        return data;
     },
 
     // render each of the tasks
@@ -48,14 +51,14 @@ App = React.createClass({
                             <ul className="list">
                                 <li className="item item-toggle">
                                      Hide Completed Tasks
-                                     <label className="toggle toggle-assertive" onMouseDown={this.toggleCompleted}>
+                                     <label className="toggle toggle-assertive" onMouseUp={this.toggleCompleted}>
                                        <input type="checkbox" />
                                        <div className="track">
                                          <div className="handle"></div>
                                        </div>
                                      </label>
                                   </li>
-                                {this.renderTasks()}
+                                {(this.data.tasks) ? this.renderTasks() : "Loading..."}
                             </ul>
                         </div>
                     </div>
