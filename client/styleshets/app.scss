@@ -1,0 +1,50 @@
+@import '.meteor/local/build/programs/server/assets/packages/meteoric_ionic-sass/_ionic';
+@import '.meteor/local/build/programs/server/assets/packages/meteoric_ionicons-sass/_ionicons';
+
+/* CSS declarations go here */
+* {
+    box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: #315481;
+  background-image: linear-gradient(to bottom, #315481, #918e82 100%);
+}
+
+// header
+.bar {
+    &.bar-header {
+        padding-top: 20px;
+        height: 64px;
+    }
+    .title {
+        top: 20px;
+    }
+}
+
+.bar-subheader {
+    top: 64px;
+}
+
+// content
+.has-subheader {
+    top: 108px;
+}
+
+.checked {
+    text-decoration: line-through;
+}
+
+.task {
+    span {
+        padding-left: 6px;
+    }
+}
+
+.delete-task {
+    cursor: pointer;
+    &:active {
+
+    }
+}
